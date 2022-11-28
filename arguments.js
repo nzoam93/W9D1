@@ -54,3 +54,44 @@ curriedSum = function(numArgs){
 const sum2 = curriedSum(4);
 console.log(sum2(5)(30)(20)(1)); // => 56
 
+// Function.prototype.curry = function(numArgs) {
+//     let that = this;
+//     let args = [];
+//     return function _curried(ele) {
+//     args.push(ele);
+//     if (args.length < numArgs) {
+//       return _curried;
+//     } else {
+//         that.apply(null, args);
+//     }
+//   }
+// }
+
+
+    
+
+Function.prototype.curry = function(numArgs) {
+    let that = this;
+    let args = [];
+    function _curry (ele) {
+        args.push(ele)
+         if (args.length < numArgs) {
+            return _curry(...args)
+         } else {
+            return that(args)
+         }
+    }
+}
+
+doubSum = sum.curry(4)
+doubSum(1)
+doubSum(2)(3)(40)
+
+
+Function.prototype.inherits = function (Parent) {
+    function Surrogate () {};
+    Surrogate.prototype = Parent.prototype;
+    this.prototype = new Surrogate ();
+    this.prototype.constructor = this
+}
+
