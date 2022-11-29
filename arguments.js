@@ -73,7 +73,7 @@ console.log(sum2(5)(30)(20)(1)); // => 56
 Function.prototype.curry = function(numArgs) {
     let that = this;
     let args = [];
-    function _curry (ele) {
+    return function _curry (ele) {
         args.push(ele)
          if (args.length < numArgs) {
             return _curry(...args)
